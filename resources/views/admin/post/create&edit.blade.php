@@ -42,6 +42,17 @@
             </select>
         </div>
         <div class="mb-3">
+            @foreach ($tags as $tag)
+                <div class="form-check form-switch text-white">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                        name="tag[]" value="{{ $tag->id }}">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">
+                        {{ $tag->name }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        <div class="mb-3">
             <label for="image_url" class="form-label text-white">IMAGE_URL</label>
             @error('image_url')
                 <p class="text-danger fs-6">

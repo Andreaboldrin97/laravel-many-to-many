@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,11 +36,12 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all();
         $categoris = Category::all();
         $post = new Post();
         $route = route('admin.post.store');
         $method = 'POST';
-        return view('admin.post.create&edit', compact(['post', 'route', 'method', 'categoris']));
+        return view('admin.post.create&edit', compact(['post', 'route', 'method', 'categoris', 'tags']));
     }
 
     /**
@@ -52,11 +54,16 @@ class PostController extends Controller
     {
         $validationData = $request->validate($this->validationRoule);
         $data = $request->all();
-
         $newPost = new Post();
         $data['user_id'] = Auth::id();
         $data['sale_date'] = new DateTime();
-        $newPost->create($data);
+        $newPost->fill($data);
+        $newPost->save();
+        if (array_key_exists('tag', $data)) {
+            $newPost->tags()->sync($data['tag']);
+        }
+
+
         return redirect()->route('admin.post.index')->with('create', $data['title']);
     }
 
