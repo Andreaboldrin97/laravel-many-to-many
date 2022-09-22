@@ -21,6 +21,7 @@
                 <th>TITLE</th>
                 <th>DESCRIPTION</th>
                 <th>CATEGORY</th>
+                <th>TAG</th>
                 <th></th>
                 <th></th>
             </thead>
@@ -43,6 +44,11 @@
                                 style="background-color:red">
                                 ------- @endif
                                 </span>
+                        </td>
+                        <td>
+                            @foreach ($post->tags as $tag)
+                                {{ $tag->name }}
+                            @endforeach
                         </td>
                         <td>
                             <a class="btn btn-success" href="{{ route('admin.post.edit', $post->id) }}">
