@@ -87,11 +87,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $tags = Tag::all();
         $categoris = Category::all();
         $post = Post::findOrFail($id);
         $route = route('admin.post.update', $post->id);
         $method = 'PUT';
-        return view('admin.post.create&edit', compact(['post', 'route', 'method', 'categoris']));
+        return view('admin.post.create&edit', compact(['post', 'route', 'method', 'categoris', 'tags']));
     }
 
     /**

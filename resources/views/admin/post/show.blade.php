@@ -16,6 +16,17 @@
             <p class="card-text">
                 POST DATE : {{ $post->sale_date }}
             </p>
+            <p>
+                @if (isset($post->tags))
+                    TAG :
+                    @foreach ($post->tags as $tag)
+                        {{ $tag->name }}
+                    @endforeach
+                @else
+                    No tag
+                @endif
+
+            </p>
         </div>
         <div class="card-footer d-flex justify-content-center">
             <div class="mx-3">
