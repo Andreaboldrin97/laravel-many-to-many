@@ -109,7 +109,11 @@ class PostController extends Controller
         $data['user_id'] = Auth::id();
         $data['sale_date'] = $post->sale_date;
         $data = $request->all();
-        $post->update($data);
+        $post->fill($data);
+        $post->save();
+        if (array_key_exists('tag', $data)) {
+            $post->tags()->sync($data['tag']);
+        }
         return redirect()->route('admin.post.index')->with('create', $data['title']);
     }
 
