@@ -44,8 +44,14 @@
         <div class="mb-3">
             @foreach ($tags as $tag)
                 <div class="form-check form-switch text-white">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
-                        name="tag[]" value="{{ $tag->id }}">
+                    @if ($errors->any())
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                            name="tag[]" value="{{ $tag->id }}"
+                            {{ in_array($tag->id, old('tag', [])) ? 'checked' : '' }}>
+                    @else
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                            name="tag[]" value="{{ $tag->id }}" {{ $post->tags->contains($tag) ? 'checked' : '' }}>
+                    @endif
                     <label class="form-check-label" for="flexSwitchCheckDefault">
                         {{ $tag->name }}
                     </label>
