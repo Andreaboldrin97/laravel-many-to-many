@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\tag;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class TagTableSeeder extends Seeder
@@ -15,7 +15,7 @@ class TagTableSeeder extends Seeder
         $tagsName = ['#BOOLEAN', '#INSTAFOOD', '#MICCOFANS', '#FOLLOWFORFOLLOW', '#LAZZA', '#POYO', '#INSTAPIC', '#REBIX', '#LIKEFORLIKE', '#LATTESANO'];
 
         foreach ($tagsName as $tag) {
-            $newTag = new tag();
+            $newTag = new Tag();
             $newTag->name = $tag;
             $newTag->save();
         }
