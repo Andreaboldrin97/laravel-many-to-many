@@ -134,4 +134,19 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.post.index')->with('delete', $post->title);
     }
+
+    /**
+     * remove Category from on post
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function removeCategoryFromPost($id)
+    {
+        $post = Post::findOrFail($id);
+        $category_id = $post->category_id;
+        $post->category_id = null;
+        $post->save();
+        return redirect()->route('admin.category.show', $category_id);
+    }
 }

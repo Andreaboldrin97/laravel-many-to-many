@@ -47,9 +47,10 @@
                     </div>
                     <div class="card-footer d-flex justify-content-center">
                         <div class="mx-3">
-                            <form action="#" class="delete-method" method="POST">
+                            <form action="{{ route('admin.removeCategoryFromPost', $post->id) }}" class="delete-method"
+                                method="POST">
                                 @csrf
-                                @method('DELETE')
+                                @method('PUT')
 
                                 <button class="btn btn-warning" type="submit">
                                     DELETE THE POST FROM THE CATEGORY
