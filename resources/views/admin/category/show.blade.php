@@ -47,17 +47,12 @@
                     </div>
                     <div class="card-footer d-flex justify-content-center">
                         <div class="mx-3">
-                            <a class="btn btn-success" href="#">
-                                Edit
-                            </a>
-                        </div>
-                        <div class="mx-3">
                             <form action="#" class="delete-method" method="POST">
                                 @csrf
                                 @method('DELETE')
 
-                                <button class="btn btn-danger" type="submit">
-                                    Delete
+                                <button class="btn btn-warning" type="submit">
+                                    DELETE THE POST FROM THE CATEGORY
                                 </button>
                             </form>
                         </div>
