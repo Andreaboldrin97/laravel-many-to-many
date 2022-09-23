@@ -29,6 +29,11 @@
         </div>
         <div class="mb-3">
             <label for="category" class="form-label text-white">CATEGORY</label>
+            @error('category_id')
+                <p class="text-danger fs-6">
+                    {{ $message }}
+                </p>
+            @enderror
             <select id="input-category" class="form-control" name="category_id">
                 <option value="">NO CATEGORY</option>
                 @foreach ($categoris as $category)

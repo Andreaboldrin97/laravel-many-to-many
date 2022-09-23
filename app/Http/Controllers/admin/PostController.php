@@ -16,7 +16,10 @@ class PostController extends Controller
     protected $validationRoule = [
         'title' => 'required|min:3',
         'description' => 'required|min:5',
-        'image_url' => 'required'
+        'image_url' => 'required',
+        'category_id' => 'nullable|exists:categories,id',
+        'tag' => 'nullable|exists:tags,id',
+
     ];
     /**
      * Display a listing of the resource.
@@ -54,6 +57,7 @@ class PostController extends Controller
     {
         $validationData = $request->validate($this->validationRoule);
         $data = $request->all();
+        dd($data);
         $newPost = new Post();
         $data['user_id'] = Auth::id();
         $data['sale_date'] = new DateTime();
