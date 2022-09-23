@@ -17,47 +17,33 @@
         <table class="table table-dark table-striped">
             <thead>
                 <th>ID</th>
-                <th>AUTHOR</th>
-                <th>TITLE</th>
-                <th>DESCRIPTION</th>
-                <th>CATEGORY</th>
-                <th>TAG</th>
+                <th>NAME</th>
+                <th>COLOR</th>
                 <th class="col-2">
-                    <a class="nav-link btn-outline-info" href="{{ route('admin.post.create') }}">NEW POST</a>
+                    <a class="nav-link btn-outline-info" href="{{ route('admin.category.create') }}">NEW CATEGORY</a>
                 </th>
 
             </thead>
             <tbody>
-                @forelse ($posts as $post)
+                @forelse ($categories as $category)
                     <tr>
-                        <td>{{ $post->id }}</td>
-                        <td>{{ $post->user->name }}</td>
+                        <td>{{ $category->id }}</td>
                         <td>
-                            <a href="{{ route('admin.post.show', $post->id) }}">
-                                {{ $post->title }}
+                            <a href="{{ route('admin.category.show', $category->id) }}">
+                                {{ $category->name }}
                             </a>
                         </td>
-                        <td>{{ $post->description }}</td>
                         <td>
-                            <span class="badge badge-fill p-2"
-                                @if (isset($post->category)) style="background-color:{{ $post->category->color }}">
-                                {{ $post->category->name }}
-                                @else
-                                style="background-color:red">
-                                ------- @endif
-                                </span>
+                            <span class="badge badge-fill p-2" style="background-color:{{ $category->color }}">
+                                {{ $category->color }}
+                            </span>
                         </td>
                         <td>
-                            @foreach ($post->tags as $tag)
-                                {{ $tag->name }} ,
-                            @endforeach
-                        </td>
-                        <td>
-                            <a class="btn btn-success" href="{{ route('admin.post.edit', $post->id) }}">
+                            <a class="btn btn-success" href="{{ route('admin.category.edit', $category->id) }}">
                                 Edit
                             </a>
-                            <form action="{{ route('admin.post.destroy', $post->id) }}" class="delete-method d-inline"
-                                method="POST">
+                            <form action="{{ route('admin.category.destroy', $category->id) }}"
+                                class="delete-method d-inline" method="POST">
                                 @csrf
                                 @method('DELETE')
 
