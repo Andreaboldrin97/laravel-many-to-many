@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $category = new Category();
+        $route = route('admin.category.store');
+        $method = 'POST';
+        return view('admin.category.create&edit', compact(['category', 'route', 'method']));
     }
 
     /**
@@ -37,7 +41,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $newCategory = new Category();
+        $newCategory->create($data);
+
+        return redirect()->route('admin.category.index');
     }
 
     /**
