@@ -57,7 +57,6 @@ class PostController extends Controller
     {
         $validationData = $request->validate($this->validationRoule);
         $data = $request->all();
-        dd($data);
         $newPost = new Post();
         $data['user_id'] = Auth::id();
         $data['sale_date'] = new DateTime();
@@ -66,7 +65,6 @@ class PostController extends Controller
         if (array_key_exists('tag', $data)) {
             $newPost->tags()->sync($data['tag']);
         }
-
 
         return redirect()->route('admin.post.index')->with('create', $data['title']);
     }
@@ -117,6 +115,8 @@ class PostController extends Controller
         $post->save();
         if (array_key_exists('tag', $data)) {
             $post->tags()->sync($data['tag']);
+        } else {
+            $post->tags()->detach($post->tag);
         }
         return redirect()->route('admin.post.index')->with('create', $data['title']);
     }
