@@ -67,7 +67,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $route = route('admin.category.update', $category->id);
+        $method = 'PUT';
+        return view('admin.category.create&edit', compact(['category', 'route', 'method']));
     }
 
     /**
@@ -79,7 +82,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $newCategory = Category::findOrFail($id);
+        $newCategory->update($data);
+
+        return redirect()->route('admin.category.index');
     }
 
     /**
