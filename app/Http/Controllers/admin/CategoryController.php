@@ -4,11 +4,14 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -41,6 +44,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:categories,name',
+            'color' => 'required|unique:categories,color'
+        ]);
         $data = $request->all();
         $newCategory = new Category();
         $newCategory->create($data);
@@ -85,6 +92,18 @@ class CategoryController extends Controller
     {
         $data = $request->all();
         $newCategory = Category::findOrFail($id);
+        $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('categories')->ignore($newCategory->name, 'name')
+            ],
+            'color' => [
+                'required',
+                Rule::unique('categories')->ignore($newCategory->color, 'color')
+            ],
+        ]);
+
+
         $newCategory->update($data);
 
         return redirect()->route('admin.category.index');
