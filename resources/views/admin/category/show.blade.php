@@ -16,7 +16,13 @@
             @foreach ($category->posts as $post)
                 <div class="border border-primary mt-3">
                     <div class="my-3">
-                        <img class="w-50" src="{{ $post->image_url }}" class="card-img-top" alt="imge {{ $post->title }}">
+                        @if (filter_var($post->image_url, FILTER_VALIDATE_URL))
+                            <img class="w-50" src="{{ $post->image_url }}" class="card-img-top"
+                                alt="imge {{ $post->title }}">
+                        @else
+                            <img class="w-50" src="{{ asset('storage/' . $post->image_url) }}" class="card-img-top"
+                                alt="image">
+                        @endif
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{ $post->user->name }}</h3>

@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <form class="col-8  offset-2 bg-dark p-4 rounded" method="POST" action="{{ $route }}" enctype="multipart/from-data">
+    <form class="col-8  offset-2 bg-dark p-4 rounded" method="POST" action="{{ $route }}" enctype="multipart/form-data">
         @method($method)
         @csrf
 

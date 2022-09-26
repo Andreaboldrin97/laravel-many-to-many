@@ -61,7 +61,7 @@ class PostController extends Controller
         $newPost = new Post();
         $data['user_id'] = Auth::id();
         $data['sale_date'] = new DateTime();
-        $data['image_url'] = Storage::put('uploads/user/' . Auth::user()->name . '/posts', $data['image_url']);
+        $data['image_url'] = Storage::put('uploads', $data['image_url']);
         $newPost->fill($data);
         $newPost->save();
         if (array_key_exists('tag', $data)) {
@@ -113,6 +113,7 @@ class PostController extends Controller
         $data['user_id'] = Auth::id();
         $data['sale_date'] = $post->sale_date;
         $data = $request->all();
+        $data['image_url'] = Storage::put('uploads', $data['image_url']);
         $post->fill($data);
         $post->save();
         if (array_key_exists('tag', $data)) {
