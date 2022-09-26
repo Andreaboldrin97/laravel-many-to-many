@@ -70,7 +70,7 @@
                     {{ $message }}
                 </p>
             @enderror
-            <input type="text" name="image_url" class="form-control" id="image_url" required
+            <input type="file" name="image_url" class="form-control" id="image_url" required
                 value="{{ old('image_url', $post->image_url) }}">
         </div>
 
