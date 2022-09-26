@@ -9,6 +9,7 @@ use App\Models\Tag;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -60,6 +61,7 @@ class PostController extends Controller
         $newPost = new Post();
         $data['user_id'] = Auth::id();
         $data['sale_date'] = new DateTime();
+        $data['image_url'] = Storage::put('uploads/user/' . Auth::user()->name . '/posts', $data['image_url']);
         $newPost->fill($data);
         $newPost->save();
         if (array_key_exists('tag', $data)) {
