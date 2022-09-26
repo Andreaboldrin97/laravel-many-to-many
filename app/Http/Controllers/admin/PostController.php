@@ -17,7 +17,7 @@ class PostController extends Controller
     protected $validationRoule = [
         'title' => 'required|min:3',
         'description' => 'required|min:5',
-        'image_url' => 'required',
+        'image_url' => 'image|max:255|mimes:jpeg,jpg,png',
         'category_id' => 'nullable|exists:categories,id',
         'tag' => 'nullable|exists:tags,id',
 
