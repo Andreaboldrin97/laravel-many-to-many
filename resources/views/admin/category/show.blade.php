@@ -11,6 +11,7 @@
                 {{ $category->name }}
             </div>
         </div>
+        {{-- SHOW OF THE POSTS --}}
         <div class="col-8 mt-3 offset-2">
             @foreach ($category->posts as $post)
                 <div class="border border-primary mt-3">
